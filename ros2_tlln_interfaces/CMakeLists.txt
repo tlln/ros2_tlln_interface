@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8)
 
-project(common_interfaces NONE)
+project(ros2_tlln_interfaces NONE)
 
 find_package(ament_cmake REQUIRED)
 
