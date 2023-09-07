@@ -1,0 +1,28 @@
+version: '3.8'
+
+x-logging:
+  &default-logging
+  options:
+    max-size: '10m'
+    max-file: '5'
+  driver: json-file
+
+services:
+  ros2dep:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ros2dep
+    environment:
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - ROS_DOMAIN_ID=1
+    image: tlln/ros2dep:dev
+    init: true
+    logging: *default-logging
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      # - ~/workspace/bcs:/root/ros2_ws/src
